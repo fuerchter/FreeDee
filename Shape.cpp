@@ -1,7 +1,5 @@
 #include "Shape.h"
 
-#include "stb_image.c"
-
 Shape::Shape(GLuint program, vector<float> positions, vector<float> normals, vector<float> texCoords, vector<unsigned int> indices, tinyobj::material_t material):
 program_(program), indicesCount_(indices.size()), material_(material), scale_(1.0f, 1.0f, 1.0f)
 {
@@ -40,13 +38,9 @@ program_(program), indicesCount_(indices.size()), material_(material), scale_(1.
 	glVertexAttribPointer(textureCoordLocation, 2, GL_FLOAT, GL_FALSE, 0, NULL); //2=numbers per coordinate
 	
 	if(material.diffuse_texname!="")
-	{
-		//Create diffuse texture
-		int width, height, channels;
-		unsigned char *pixels = stbi_load(material.diffuse_texname.c_str(), &width, &height, &channels, 0);
-		//Having to flip the texture
-		unsigned char *flippedPixels=StbiHelper::flipY(pixels, width, height, channels);
-		stbi_image_free(pixels);
+	{		
+		StbImage texture(material.diffuse_texname);
+		texture.flipY();
 		
 		glGenTextures(1, &diffuseTex_);
 		glBindTexture(GL_TEXTURE_2D, diffuseTex_);
@@ -56,16 +50,14 @@ program_(program), indicesCount_(indices.size()), material_(material), scale_(1.
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 		glTexImage2D(GL_TEXTURE_2D, 0, 
 					 GL_RGBA,
-					 (GLsizei)width, 
-					 (GLsizei)height,
+					 (GLsizei)texture.getSize().x, 
+					 (GLsizei)texture.getSize().y,
 					 0, 
 					 GL_RGBA, 
 					 GL_UNSIGNED_BYTE, 
-					 flippedPixels);
+					 &texture.getPixels()[0]);
 		
 		glBindTexture(GL_TEXTURE_2D, 0);
-		
-		stbi_image_free(flippedPixels);
 		
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}

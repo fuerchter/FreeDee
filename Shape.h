@@ -12,12 +12,12 @@ using namespace std;
 
 #include "tiny_obj_loader.h"
 
-#include "StbiHelper.h"
+#include "StbImage.h"
 
 class Shape
 {
 public:
-	//multiple lights, lookat/rotation conversion, exception safety/shader variable names
+	//exception safety/shader variable names
 	Shape(GLuint program, vector<float> positions, vector<float> normals, vector<float> texCoords, vector<unsigned int> indices, tinyobj::material_t material);
 	~Shape();
 	

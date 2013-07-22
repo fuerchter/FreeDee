@@ -64,7 +64,7 @@ int main()
 	
 	GLuint program=prepareProgram(shaders);
 	
-	string inputfile = "teapot.obj";
+	string inputfile = "cube.obj";
 	vector<tinyobj::shape_t> shapes;
 
 	string err = tinyobj::LoadObj(shapes, inputfile.c_str(), "");
