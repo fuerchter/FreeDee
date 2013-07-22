@@ -22,6 +22,6 @@ void main() {
 	vec3 surfaceToLight = normalize(lightPosition - fragPosition);
 	
 	float brightness = max(dot(normal, surfaceToLight), 0);
-	finalColor=brightness* vec4(lightColor, 1)* vec4(diffuse, 1.0);
+	//finalColor=brightness* vec4(lightColor, 1)* vec4(diffuse, 1.0);
 	finalColor=brightness* vec4(lightColor, 1)* texture(diffuseTex, fragTexCoord);
 }

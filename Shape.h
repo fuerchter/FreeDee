@@ -17,14 +17,17 @@ using namespace std;
 class Shape
 {
 public:
-	//TODO: accept mesh_t, set transform parent, create rectangle/box, multiple lights, lookat/rotation conversion, exception safety/shader variable names
+	//multiple lights, lookat/rotation conversion, exception safety/shader variable names
 	Shape(GLuint program, vector<float> positions, vector<float> normals, vector<float> texCoords, vector<unsigned int> indices, tinyobj::material_t material);
 	~Shape();
+	
 	void setProjection(glm::mat4 projection);
 	void setView(glm::mat4 view);
+	
 	void setPosition(glm::vec3 position);
 	void setRotation(glm::vec3 rotation);
 	void setScale(glm::vec3 scale);
+	
 	void draw();
 private:
 	GLuint program_;
@@ -34,6 +37,7 @@ private:
 	GLuint normals_;
 	GLuint texCoords_;
 	GLuint indices_;
+	
 	unsigned int indicesCount_;
 	
 	tinyobj::material_t material_;
