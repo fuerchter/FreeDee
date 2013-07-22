@@ -41,7 +41,14 @@ endif()
 
 set(LIBRARIES ${LIBRARIES} OpenGL32)
 
-file(GLOB EXECUTABLES "*.h" "*.cpp")
+#Folders to be searched
+set(FOLDERS "src" "src/Renderer")
+
+#Adding source files in each of the FOLDERS to EXECUTABLES
+foreach(FOLDER ${FOLDERS})
+	file(GLOB GLOBFILES "${FOLDER}/*.h" "${FOLDER}/*.cpp")
+	set(EXECUTABLES ${EXECUTABLES} ${GLOBFILES})
+endforeach(FOLDER)
 
 add_executable(glstart ${EXECUTABLES})
 target_link_libraries(glstart ${LIBRARIES})

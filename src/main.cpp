@@ -13,7 +13,7 @@ using namespace std;
 
 #include "tiny_obj_loader.h"
 
-#include "Shape.h"
+#include "Renderer/Shape.h"
 
 string readFile(string name);
 GLuint prepareShader(string code, GLenum type);
