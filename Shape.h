@@ -12,9 +12,10 @@ using namespace std;
 
 #include "tiny_obj_loader.h"
 
+#include "Drawable.h"
 #include "StbImage.h"
 
-class Shape
+class Shape : Drawable
 {
 public:
 	//exception safety/shader variable names
@@ -28,7 +29,7 @@ public:
 	void setRotation(glm::vec3 rotation);
 	void setScale(glm::vec3 scale);
 	
-	void draw();
+	virtual void draw() override;
 private:
 	GLuint program_;
 	GLuint vertexArray_;
